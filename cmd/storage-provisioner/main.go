@@ -25,7 +25,7 @@ import (
 	"k8s.io/minikube/pkg/storage"
 )
 
-var pvDir = "/tmp/hostpath-provisioner"
+var pvDir = "/var/lib/hostpath-provisioner"
 
 func main() {
 	// Glog requires that /tmp exists.
