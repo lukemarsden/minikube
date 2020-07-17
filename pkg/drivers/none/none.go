@@ -18,6 +18,7 @@ package none
 
 import (
 	"fmt"
+	"os"
 	"os/exec"
 
 	"github.com/docker/machine/libmachine/drivers"
@@ -95,11 +96,15 @@ func (d *Driver) DriverName() string {
 
 // GetIP returns an IP or hostname that this host is available at
 func (d *Driver) GetIP() (string, error) {
-	ip, err := knet.ChooseHostInterface()
-	if err != nil {
-		return "", err
+	if os.Getenv("MINIKUBE_USE_IP") != "" {
+		return os.Getenv("MINIKUBE_USE_IP"), nil
+	} else {
+		ip, err := knet.ChooseHostInterface()
+		if err != nil {
+			return "", err
+		}
+		return ip.String(), nil
 	}
-	return ip.String(), nil
 }
 
 // GetSSHHostname returns hostname for use with ssh
