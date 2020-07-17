@@ -47,7 +47,7 @@ type hostPathProvisioner struct {
 // NewHostPathProvisioner creates a new Provisioner using host paths
 func NewHostPathProvisioner() controller.Provisioner {
 	return &hostPathProvisioner{
-		pvDir:    "/tmp/hostpath-provisioner",
+		pvDir:    "/var/lib/hostpath-provisioner",
 		identity: uuid.NewUUID(),
 	}
 }
